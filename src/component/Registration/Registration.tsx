@@ -1,5 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithPopup, EmailAuthCredential, sendSignInLinkToEmail  } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import UserContext from "../AuthContext/AuthContext";
 import config from "../../config";
 
 type Inputs = {
@@ -12,8 +14,10 @@ type Inputs = {
 
 function Registration(){
     const auth = getAuth(config);
+    const navigate = useNavigate();
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const value = useContext(UserContext);
 
     function signUp(){
         createUserWithEmailAndPassword(auth, email, password)
@@ -22,6 +26,7 @@ function Registration(){
           const user = userCredential.user;
           console.log(user);
           alert("The user was successfully created")
+          navigate("/login")
           // ...
         })
         .catch((error) => {
@@ -31,13 +36,6 @@ function Registration(){
         });
     }
 
-    // const value = useContext(UserContext)
-    // useEffect(() => {
-    //   if (value.user){
-    //     navigate("/home")
-    //   }
-    // })
-
     return (
         <div>
             <h1>Registration</h1>
@@ -45,7 +43,7 @@ function Registration(){
             <input type={"email"} placeholder="Please enter your email" onChange={(e) => setEmail(e.target.value)}></input>
             <h2>Password</h2>
             <input type={"password"} placeholder="Please enter your password" onChange={(e) => setPassword(e.target.value)}></input>
-            <button onClick={signUp}></button>
+            <button onClick={signUp}>Sign Up</button>
         </div>
     )
 }

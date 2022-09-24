@@ -1,14 +1,19 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import styles from "./Login.module.css";
+import UserContext from "../AuthContext/AuthContext";
+// import styles from "./Login.module.css";
 import config from "../../config";
 import login from "../../assets/login.jpg";
 
 function Login(){
+    const navigate = useNavigate();
     const auth = getAuth(config);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+
+    const value = useContext(UserContext)
 
     const signIn = () => {
         signInWithEmailAndPassword(auth, email, password)
@@ -25,18 +30,25 @@ function Login(){
         alert(errorCode)
     });
     }
+
+    useEffect(() => {
+        if (value.user) {
+            navigate("/home")
+        }
+    }, [])
+
     return (
         <>
         
-        <div className={styles["container"]}>
-            <img className={styles["login-img"]} src={login} />
-            <div className={styles["login-section"]}>
-                <p className={styles["description"]}>Welcome back, please login into your account</p>
-                <h2 className={styles["title"]}>Email</h2>
-                <input className={styles["input"]} type={"email"} placeholder="please enter your email" onChange={(e) => setEmail(e.target.value)}/>
-                <h2 className={styles["title"]}>Password</h2>
-                <input className={styles["input"]} type={"password"} placeholder="please enter your password" onChange={(e) => setPassword(e.target.value)}/>
-                <button className={styles["button"]} onClick={signIn}>Sign In</button>
+        <div>
+            <img/>
+            <div>
+                <p>Welcome back, please login into your account</p>
+                <h2>Email</h2>
+                <input type={"email"} placeholder="please enter your email" onChange={(e) => setEmail(e.target.value)}/>
+                <h2>Password</h2>
+                <input type={"password"} placeholder="please enter your password" onChange={(e) => setPassword(e.target.value)}/>
+                <button onClick={signIn}>Sign In</button>
             </div>
         </div>
         </>
