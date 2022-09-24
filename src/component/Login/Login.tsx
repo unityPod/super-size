@@ -8,12 +8,12 @@ import config from "../../config";
 import login from "../../assets/login.jpg";
 
 function Login(){
-    const navigate = useNavigate();
     const auth = getAuth(config);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const navigate = useNavigate();
+    const value = useContext(UserContext);
 
-    const value = useContext(UserContext)
 
     const signIn = () => {
         signInWithEmailAndPassword(auth, email, password)
@@ -22,6 +22,7 @@ function Login(){
         const user = userCredential.user;
         console.log(user);
         alert("This user is successfully signed in")
+        navigate("/home")
     // ...
     })
     .catch((error) => {
@@ -36,6 +37,7 @@ function Login(){
             navigate("/home")
         }
     }, [])
+
 
     return (
         <>
