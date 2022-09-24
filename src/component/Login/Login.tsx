@@ -46,11 +46,11 @@ function Login(){
             <div className={styles["inner-container"]}>
                 <h2 className={styles["title"]}>Super Size</h2>
                 <h1 className="font-primary text-[16px] leading-8">Sign In to this very serious fitness app</h1>
-                <h2 className="font-primary text-[16px] leading-8">If you don't have an account <Link to="/signup">Register Now</Link></h2>
+                <h2 className="font-primary text-[16px] leading-8">If you don't have an account <Link className="font-primary font-bold text-secondary-200" to="/signup">Register Now</Link></h2>
             </div>
             <img className={styles["login-img"]} src={LoginImg}/>
             <div className={styles["inner-container"]}>
-                <p className="font-primary font-bold text-[16px] leading-8">Welcome back, please login into your account</p>
+                <p className="font-primary font-bold text-secondary-300 text-[20px] leading-8">Welcome back, please login into your account</p>
                 <h2 className="font-primary text-[16px] leading-8">Email</h2>
                 <input className={styles["input"]} type={"email"} placeholder="please enter your email" onChange={(e) => setEmail(e.target.value)}/>
                 <h2 className="font-primary text-[16px] leading-5">Password</h2>
