@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Login from './component/Login/Login';
 import { Home } from './component/Home/Home';
 import Registration from './component/Registration/Registration';
+import DailyCalories from './component/DailyCalories/DailyCalories';
 import { AuthContextProvider } from './component/AuthContext/AuthContext';
 import logo from './logo.svg';
 import style from './App.module.css';
@@ -16,6 +17,7 @@ const App = () => {
       <Route path="/signup" element={<Registration />} />
       <Route path="/login" element={<Login />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/daily" element={<DailyCalories />} />
     </Routes>
     </BrowserRouter>
     </AuthContextProvider>
