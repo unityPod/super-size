@@ -1,0 +1,24 @@
+.container {
+  @apply flex flex-col my-[80px];
+}
+
+.input {
+  @apply w-[325px] md:w-[395.04px] lg:w-[500px] h-[76.04px] rounded-[9.87597px] bg-secondary-600 p-[28px] mt-[28px];
+}
+
+.inputArea {
+  @apply w-[325px] md:w-[395.04px] h-[120.04px] lg:w-[500px] rounded-[9.87597px] bg-secondary-600 p-[10px] mt-[28px];
+  resize: none;
+}
+
+select {
+  appearance: none;
+  background-image: url("../../../../assets/icons/close.png");
+  background-repeat: no-repeat;
+  background-position: 97% 53%;
+}
+
+.button {
+  @apply w-[310px] h-[59.26px] md:w-[395px] bg-primary-100 font-[700] text-[18.76px] tracking-[0.09em] text-teritary-600 not-italic rounded-[9.87px]  my-[25px] mx-auto;
+  box-shadow: 0px 11.8512px 20.7395px 3.95039px rgba(68, 97, 242, 0.15);
+}
