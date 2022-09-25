@@ -1,15 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-  EmailAuthCredential,
-  sendSignInLinkToEmail,
-} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../AuthContext/AuthContext";
 import config from "../../config";
 import { RegistrationContext } from "./RegistrationContext";
+import { createUserDocumentFromAuth } from "../../utils/firebase.utils";
 
 type Inputs = {
   username: string;
@@ -27,12 +22,13 @@ function Registration() {
   const [password, setPassword] = useState<string>("");
   const value = useContext(UserContext);
 
-  function signUp() {
+  const signUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Signed in
-        const user = userCredential.user;
-        console.log(user);
+        const userAuth = userCredential.user;
+        await createUserDocumentFromAuth(userAuth, user);
+
         alert("The user was successfully created");
         navigate("/login");
         // ...
@@ -42,7 +38,7 @@ function Registration() {
         // ..
         alert(errorCode);
       });
-  }
+  };
 
   return (
     <div>
